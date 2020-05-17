@@ -34,7 +34,7 @@ public class FicheroPreguntas {
                 pregunta.setAnunciado(lieaCategoria[0].split("-")[1]);    //Separacion del enunciado de la pregunta
                 pregunta.setCategoria(Categoria.valueOf(lieaCategoria[1].toUpperCase()));
 
-                linea=input.nextLine();
+                linea=ControlErrores.controlInputString();
                 }
                 while (linea.contains("•")) {
 
@@ -43,7 +43,7 @@ public class FicheroPreguntas {
                         respuestString=respuestString.split(Pattern.quote("("))[0];
                         pregunta.setRespuestaCorrecta(respuestString);
                     }
-                    linea=input.nextLine();
+                    linea=ControlErrores.controlInputString();
                     respuestas.add(respuestString);
 
 

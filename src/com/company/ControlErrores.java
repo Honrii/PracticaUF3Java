@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class ControlErrores {
 
-    public static double controlInputDouble(){
+    public static String controlInputString(){
         Scanner sc = new Scanner(System.in);
         boolean valorCorrecte;
-        double x = 0;
+        String x = null;
         do {
             if (!sc.hasNextDouble()) {
                 sc.nextLine();
                 valorCorrecte = false;
                 System.out.println("No me seas mal usuario!");
             } else {
-                x = sc.nextDouble();
+                x = sc.nextLine();
                 valorCorrecte = true;
             }
         } while (!valorCorrecte);

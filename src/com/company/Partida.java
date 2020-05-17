@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+
 
 public class Partida {
    private ArrayList<Jugador> jugadores;
@@ -90,7 +90,6 @@ public class Partida {
         }
     }
     private Corona selecionarCorona(Jugador jugador){
-        Scanner sc = new Scanner(System.in);
         int respuestaUsuario;
         int i=1;
         System.out.println("Decide categoria de la corona");
@@ -115,7 +114,6 @@ public class Partida {
 
     }
     private boolean responderPregunta(Pregunta preguntaSelecionda){
-        Scanner sc = new Scanner(System.in);
         int respUsu;
 
         System.out.println("Te ha tocado un pregunta de: "+preguntaSelecionda.getCategoria());
@@ -126,7 +124,7 @@ public class Partida {
             System.out.println(i+"-"+respuesta);
             i++;
         }
-        respUsu=sc.nextInt();
+        respUsu=ControlErrores.controlInputInt();
         String respuestaUsuario=preguntaSelecionda.getRespuestas().get(respUsu-1);
         if (respuestaUsuario.equals(preguntaSelecionda.getRespuestaCorrecta())){
             return true;
