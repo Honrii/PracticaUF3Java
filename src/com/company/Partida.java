@@ -19,12 +19,12 @@ public class Partida {
     }
     private void initCoronas(){
         this.coronas=new ArrayList<>();
-        coronas.add(new Corona(Categoria.ARTE));
-        coronas.add(new Corona(Categoria.CIENCIA));
-        coronas.add(new Corona(Categoria.DEPORTES));
+       coronas.add(new Corona(Categoria.ARTE));
+      coronas.add(new Corona(Categoria.CIENCIA));
+       coronas.add(new Corona(Categoria.DEPORTES));
         coronas.add(new Corona(Categoria.ENTRETENIMIENTO));
-        coronas.add(new Corona(Categoria.GEOGRAFIA));
-        coronas.add(new Corona(Categoria.HISTORIA));
+       coronas.add(new Corona(Categoria.GEOGRAFÍA));
+      coronas.add(new Corona(Categoria.HISTORIA));
     }
 
 
