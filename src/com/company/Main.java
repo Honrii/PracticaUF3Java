@@ -12,15 +12,8 @@ public class Main {
         Partida partida = new Partida(loginJugadores(),listaPreguntas);
         partida.iniciarPartida();
 
+        FicheroPartidas.gurdarPartida(partida);
 
-     /*   int streakAciertos=0;
-        int catElegida=Pregunta
-        if(streakAciertos != 3){
-            catElegida = random.nextInt(7);
-        }else{
-            catElegida =  6;
-            System.out.println("Racha de "+streakAciertos+" ,toca corona");
-        }*/
     }
     public  static ArrayList<Jugador> loginJugadores (){
         ArrayList<Jugador> jugadores= new ArrayList<>();
@@ -31,7 +24,7 @@ public class Main {
         resp=sc.nextInt();
         String nombre="";
         for (int i = 0; i <resp ; i++) {
-            System.out.println("Introduce el nomnre del Jugador: "+(i+1));
+            System.out.println("Introduce el nombre del Jugador: "+(i+1));
             nombre=nomsc.nextLine();
             Jugador jugador = new Jugador(nombre);
             jugadores.add(jugador);

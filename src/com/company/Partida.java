@@ -19,35 +19,77 @@ public class Partida {
     }
     private void initCoronas(){
         this.coronas=new ArrayList<>();
-       coronas.add(new Corona(Categoria.ARTE));
-      coronas.add(new Corona(Categoria.CIENCIA));
-       coronas.add(new Corona(Categoria.DEPORTES));
+        coronas.add(new Corona(Categoria.ARTE));
+        coronas.add(new Corona(Categoria.CIENCIA));
+        coronas.add(new Corona(Categoria.DEPORTES));
         coronas.add(new Corona(Categoria.ENTRETENIMIENTO));
-       coronas.add(new Corona(Categoria.GEOGRAFÍA));
-      coronas.add(new Corona(Categoria.HISTORIA));
+        coronas.add(new Corona(Categoria.GEOGRAFÍA));
+        coronas.add(new Corona(Categoria.HISTORIA));
     }
 
 
 
 
     public void iniciarPartida(){
-        Random random = new Random();
-        //int catElegida=this.coronas.size()+1; /*Forzar Corona*/
-        Corona categoriaAsignada;
-        int catElegida=random.nextInt(this.coronas.size()+1);       //this.coronas.size()+1 = 6 cat + corona
-        if (catElegida==this.coronas.size()+1){
-            System.out.println("Te toco corona");
-            categoriaAsignada=selecionarCorona();
-        }else{
-            categoriaAsignada= this.coronas.get(catElegida);
+        int index=0;
+        Jugador jugador;
+        while (true) {
+            jugador=jugadores.get(index);
+            if (jugador.getCoronas().size()==6){
+                System.out.println("HA GANADO EL JUGADOR: "+jugador.getNombre());
+                break;
+            }
+            turno(jugador);
+            if (index==jugadores.size()-1){
+
+                index=0;
+            }else{
+                index++;
+            }
         }
-        Pregunta preguntaSelecionada = selecionarPregunta(categoriaAsignada.getCategoria());
-        System.out.println(responderPregunta(preguntaSelecionada));
-
-
 
     }
-    private Corona selecionarCorona(){
+
+    private void turno(Jugador player){
+        System.out.println("Es el turno del Jugador: "+player.getNombre());
+        while (true) {
+            System.out.println("Llevas acertadas: "+player.getPreguntasAcertadas());
+            System.out.print("Llevas de coronas:");
+            for (Corona corona:player.getCoronas()) {
+                System.out.print(corona.getCategoria()+" | ");
+
+            }
+            System.out.println(" ");
+            boolean respuestaCorecta;
+            int catElegida;
+            Random random = new Random();
+            if (player.getPreguntasAcertadas()==3){
+                catElegida=this.coronas.size(); /*Forzar Corona*/
+                player.setPreguntasAcertadas(0);
+            }else{
+                catElegida = random.nextInt(this.coronas.size() );       //this.coronas.size()+1 = 6 cat + corona
+            }
+            Corona categoriaAsignada;
+            if (catElegida == this.coronas.size() ) {
+               responderPreguntaCorona(player);
+               break;
+            } else {
+                categoriaAsignada = this.coronas.get(catElegida);
+                Pregunta preguntaSelecionada = selecionarPregunta(categoriaAsignada.getCategoria());
+                respuestaCorecta=responderPregunta(preguntaSelecionada);
+            }
+
+            if (!respuestaCorecta ) {
+                System.out.println("Has Fallado!!");
+                    break;
+            }else {
+                System.out.println("Correcto");
+                player.acertarPregunta();//suma una respuesta
+            }
+
+        }
+    }
+    private Corona selecionarCorona(Jugador jugador){
         Scanner sc = new Scanner(System.in);
         int respuestaUsuario;
         int i=1;
@@ -56,9 +98,21 @@ public class Partida {
             System.out.println(i+"-"+corona.getCategoria());
             i++;
         }
-        respuestaUsuario=sc.nextInt();
+        respuestaUsuario=ControlErrores.controlInputInt();
 
         return  this.coronas.get(respuestaUsuario-1);
+    }
+    private boolean responderPreguntaCorona(Jugador player){
+        System.out.println("Te toco corona");
+        Corona categoriaAsignada = selecionarCorona(player);
+        Pregunta preguntaSelecionada= selecionarPregunta(categoriaAsignada.getCategoria());
+        if (responderPregunta(preguntaSelecionada)){
+            player.getCoronas().add(new Corona(preguntaSelecionada.getCategoria()));
+            return  true;
+        }else System.out.println("Has fallado la corona");
+            return false;
+
+
     }
     private boolean responderPregunta(Pregunta preguntaSelecionda){
         Scanner sc = new Scanner(System.in);
@@ -89,7 +143,7 @@ public class Partida {
             }
         }
         Random random = new Random();
-        int preguntaElegida = random.nextInt((preguntasDeLaCategoria.size()) + 1);
+        int preguntaElegida = random.nextInt((preguntasDeLaCategoria.size()) );
         return preguntasDeLaCategoria.get(preguntaElegida);
 
 

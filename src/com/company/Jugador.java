@@ -6,12 +6,17 @@ public class Jugador {
 
     private String nombre;
     private ArrayList<Corona> coronas;
+    private int preguntasAcertadas;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.coronas = new ArrayList<>();
+        this.preguntasAcertadas= 0;
     }
 
+    public void acertarPregunta(){
+        this.preguntasAcertadas++;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -26,5 +31,13 @@ public class Jugador {
 
     public void setCoronas(ArrayList<Corona> coronas) {
         this.coronas = coronas;
+    }
+
+    public int getPreguntasAcertadas() {
+        return preguntasAcertadas;
+    }
+
+    public void setPreguntasAcertadas(int preguntasAcertadas) {
+        this.preguntasAcertadas = preguntasAcertadas;
     }
 }
