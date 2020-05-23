@@ -1,27 +1,27 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Pregunta>listaPreguntas= FicheroPreguntas.leerArchivo();
+       ArrayList<Pregunta>listaPreguntas=FicheroPreguntas.leerArchivo();
 
-        Partida partida = new Partida(loginJugadores(),listaPreguntas);
-        partida.iniciarPartida();
+        Partida p1 = new Partida(loginJugadores(),listaPreguntas);
+        p1.iniciarPartida();
+        FicheroPartidas.gurdarPartida(p1);
 
-        FicheroPartidas.gurdarPartida(partida);
 
     }
     public  static ArrayList<Jugador> loginJugadores (){
         ArrayList<Jugador> jugadores= new ArrayList<>();
 
-        Scanner nomsc = new Scanner(System.in);
+        //Scanner nomsc = new Scanner(System.in);
         int resp=0;
         System.out.println("Quanto jugadores soys");
         resp=ControlErrores.controlInputInt();
+
         String nombre="";
         for (int i = 0; i <resp ; i++) {
             System.out.println("Introduce el nombre del Jugador: "+(i+1));

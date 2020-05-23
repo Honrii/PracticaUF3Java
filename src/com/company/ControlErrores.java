@@ -9,7 +9,7 @@ public class ControlErrores {
         boolean valorCorrecte;
         String x = null;
         do {
-            if (!sc.hasNextDouble()) {
+            if (!sc.hasNextLine()) {
                 sc.nextLine();
                 valorCorrecte = false;
                 System.out.println("No me seas mal usuario!");

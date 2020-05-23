@@ -28,13 +28,13 @@ public class FicheroPreguntas {
 
                 if (linea.contains("|")) {
 
-                String[] lieaCategoria = linea.split(Pattern.quote("| "));
+                    String[] lieaCategoria = linea.split(Pattern.quote("| "));
 
 
-                pregunta.setAnunciado(lieaCategoria[0].split("-")[1]);    //Separacion del enunciado de la pregunta
-                pregunta.setCategoria(Categoria.valueOf(lieaCategoria[1].toUpperCase()));
+                    pregunta.setAnunciado(lieaCategoria[0].split("-")[1]);    //Separacion del enunciado de la pregunta
+                    pregunta.setCategoria(Categoria.valueOf(lieaCategoria[1].toUpperCase()));
 
-                linea=ControlErrores.controlInputString();
+                    linea=input.nextLine();
                 }
                 while (linea.contains("•")) {
 
@@ -43,7 +43,7 @@ public class FicheroPreguntas {
                         respuestString=respuestString.split(Pattern.quote("("))[0];
                         pregunta.setRespuestaCorrecta(respuestString);
                     }
-                    linea=ControlErrores.controlInputString();
+                    linea=input.nextLine();
                     respuestas.add(respuestString);
 
 
